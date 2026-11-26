@@ -321,8 +321,10 @@ h1,h2,h3,.hero-ar,.quote p{font-family:Amiri,Georgia,serif}
 <div class="rx-modal" id="placeModal" role="dialog" aria-modal="true" aria-label="تفاصيل المكان">
  <article class="papyrus-sheet place-sheet"><button class="modal-close" id="placeClose" aria-label="إغلاق">×</button><div id="placeContent"></div></article>
 </div>
-<a class="wa-float" href="https://wa.me/201044866791" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">💬 <span>كلّمنا على واتساب</span></a>
+<a class="wa-float" href="https://wa.me/201044866791?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9%20%D8%B3%D9%81%D8%B1%20%F0%9F%91%8B%0A%D8%A3%D9%86%D8%A7%20%D8%AC%D8%A7%D9%8A%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%20%D8%A7%D9%84%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9%20%D9%88%D8%B9%D9%86%D8%AF%D9%8A%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">💬 <span>كلّمنا على واتساب</span></a>
 <script>
+// ضعي رابط موقعك هنا (بين علامتي التنصيص) ليظهر دايمًا في رسالة واتساب. مثال: const SITE_URL='https://username.github.io/travel-clinic/';
+const SITE_URL='';
 const prescriptions=[
 {n:"01",title:"متلازمة ضغط الشغل المزمن",cat:"stress",diagnosis:"ارتفاع مستمر في مستوى الإيميلات والاجتماعات، مع أعراض اشتياق ملحوظة ليوم بلا تنبيهات.",treat:"جرعة من الهدوء في سيوة أو الفيوم، مع تغيير المشهد والابتعاد المؤقت عن روتين العمل.",dose:"2–4 أيام حسب شدة الحالة، مع جلسة غروب يومية ومشي هادئ.",warning:"يُمنع فتح البريد الإلكتروني بحجة الاطمئنان. قد تظهر رغبة في تمديد الإجازة.",follow:"إعادة تقييم الحالة بعد العودة بأسبوع."},
 {n:"02",title:"إجهاد الحياة اليومية",cat:"stress",diagnosis:"استهلاك متكرر للطاقة نتيجة تكرار نفس الأيام والمهام.",treat:"رحلة قصيرة إلى الفيوم أو أسوان لاستعادة الإيقاع الطبيعي.",dose:"يومان إلى ثلاثة، مع وقت مفتوح للطبيعة دون جدول مزدحم.",warning:"لا تجمع كل الأنشطة في يوم واحد؛ الراحة جزء من الجرعة.",follow:"متابعة المزاج بعد أول ليلة نوم هادئة."},
@@ -434,12 +436,8 @@ document.getElementById('secretTrigger').addEventListener('click',()=>document.g
 document.getElementById('requestForm').addEventListener('submit',e=>{
  e.preventDefault();
  const name=document.getElementById('name').value.trim(),age=document.getElementById('age').value.trim(),phone=document.getElementById('phone').value.trim(),time=document.getElementById('time').value,desc=document.getElementById('case').value.trim();
- const msg=encodeURIComponent(`طلب روشتة من عيادة سفر
-الاسم: ${name}
-السن: ${age||'لم يذكر'}
-رقم الموبايل: ${phone}
-ميعاد التواصل: ${time}
-الحالة: ${desc}`);
+ const sep='━━━━━━━━━━━━━━';const SITE=(typeof SITE_URL!=='undefined'&&SITE_URL)||(location.protocol.startsWith('http')?location.origin+location.pathname:'');const pg=SITE?`\n🔗 ${SITE}`:'';
+ const msg=encodeURIComponent(`🩺 *طلب كشف جديد — من موقع عيادة سفر*\n${sep}\n👤 *الاسم:* ${name}\n🎂 *السن:* ${age||'لم يذكر'}\n📱 *رقم الموبايل:* ${phone}\n🕒 *أنسب وقت للتواصل:* ${time}\n${sep}\n📝 *الحالة / الرحلة المطلوبة:*\n${desc}\n${sep}\n_تم إرسال هذا الطلب من نموذج الحجز في موقع Travel Clinic | عيادة سفر_${pg}`);
  window.open('https://wa.me/201044866791?text='+msg,'_blank','noopener');
 });
 </script>
